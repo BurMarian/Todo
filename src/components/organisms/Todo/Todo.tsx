@@ -48,6 +48,17 @@ function Todo({
     setFilterByStatus(value);
   };
 
+  const test =
+    todos.length > 0
+      ? todos.filter((todo) =>
+          filterByStatus === 'all'
+            ? todo
+            : filterByStatus === 'completed'
+            ? todo.completed
+            : !todo.completed
+        )
+      : [];
+
   return (
     <Box
       maxHeight="100%"
@@ -67,7 +78,7 @@ function Todo({
             key={`${value}-${index}`}
             onClick={() => handleFilter(value)}
           >
-            {value}
+            {value} {value === filterByStatus && test?.length}
           </Button>
         ))}
       </Box>
